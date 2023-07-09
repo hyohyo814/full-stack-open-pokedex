@@ -17,6 +17,9 @@ jobs:
         run: npm i
       - name: Check style
         run: npm run eslint
+      - name: custom health check
+        run: |
+          ./health_check.sh
       - name: Run tests
         run: npm run test
       - name: e2e tests
