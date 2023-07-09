@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for hyohyo-pokedex on 2023-07-09T14:10:17-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "hyohyo-pokedex"
+primary_region = "lax"
+
+[env]
+  PORT = "8080"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.17.0"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
