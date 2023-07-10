@@ -19,7 +19,7 @@ primary_region = "lax"
   [build.args]
     NODE_VERSION = "16.17.0"
 
-[[http_services]]
+[[http_service]]
   internal_port = 8080
   processes = ["app"]
 
