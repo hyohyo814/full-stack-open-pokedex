@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     branches: [master]
-    types: [opened, synchronize, closed]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -33,7 +33,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   tag_release:
-    if: github.event.pull_request.merged == true 
+    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
