@@ -1,7 +1,7 @@
 name: Health Check Periodic
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/30 * * * *'
 
 jobs:
   url-health-check:
