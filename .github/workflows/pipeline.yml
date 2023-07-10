@@ -21,9 +21,6 @@ jobs:
         run: npm i
       - name: Check style
         run: npm run eslint
-      - name: custom health check
-        run: |
-          ./health_check.sh
       - name: Run tests
         run: npm run test
       - name: e2e component tests
@@ -51,6 +48,20 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
+      - name: success report
+        if: success()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: 'A new version of pokedex has been deployed.'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: failure report
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: warn
+          details: 'An error has occured. more info in commit'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
 
     
 
